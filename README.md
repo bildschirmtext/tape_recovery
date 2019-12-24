@@ -17,5 +17,7 @@ You can change the extensions of the resulting binary files by setting the varia
 
 # Guide to the programs
 demod.c: Demodulates audio with a center frequency of a quarter of the sampling rate. So for 1700 Hz use 6800 Hz. Output rate will be half of input rate.
+
 split.c: Looks at the demodulated audio and splits the data into chunks separated by longish unmodulated sections.
+
 uart.c: Takes demodulated data at 16 times the data rate and spits out the octets. Currenty it does not check framing.
