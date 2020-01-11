@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 						sno_to_string(time, sizeof(time)-1, framestart);
 						char fn[256];
 						memset(fn,0, sizeof(fn));
-						snprintf(fn, sizeof(fn)-1,"%s%03d%s.cpt", prefix, blocknumber, time);
+						snprintf(fn, sizeof(fn)-1,"%s%03d_%s.cpt", prefix, blocknumber, time);
 						f=fopen(fn, "w");
 						if (f==NULL) {
 							printf("Couldn't create file %s\n", fn);
