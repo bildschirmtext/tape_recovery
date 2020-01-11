@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 	long long int lastframestart=-1; //When did the previous frame start?
 	uint16_t byte=0;
 	int framepos=-1;
+	int blocknumber=0;
 	while (!feof(stdin)) {
 		char c=fgetc(stdin);
 		if (framepos<0) {
@@ -75,12 +76,13 @@ int main(int argc, char *argv[])
 						sno_to_string(time, sizeof(time)-1, framestart);
 						char fn[256];
 						memset(fn,0, sizeof(fn));
-						snprintf(fn, sizeof(fn)-1,"%s%s.cpt", prefix, time);
+						snprintf(fn, sizeof(fn)-1,"%s%03d%s.cpt", prefix, blocknumber, time);
 						f=fopen(fn, "w");
 						if (f==NULL) {
 							printf("Couldn't create file %s\n", fn);
 							return 1;
 						}
+						blocknumber=blocknumber+1;
 					}
 					putc(byte,f);
 					lastframestart=framestart;
