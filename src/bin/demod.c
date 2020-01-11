@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 			double p=i[1]*i[1]+q[1]*q[1];
 			double frq=-f/p;
 			if (p<2e-3) frq=0;
-			printf("0 %lf\n", frq/10);
+			printf("%lf %lf\n", t, frq/10);
 			i[2]=i[1]; i[1]=i[0];
 			q[2]=q[1]; q[1]=q[0];
 		}
