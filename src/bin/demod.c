@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 	double i[3]={0,0,0};
 	double q[3]={0,0,0};
 	int n=0;
+	double mute_time=0;
 	while (scanf("%lf%lf", &t, &x)==2) {
 		if (n==0) i[0]=x; else
 		if (n==1) q[0]=x; else
@@ -23,7 +24,8 @@ int main(int argc, char **argv)
 			double f=i_*q[1]-q_*i[1];
 			double p=i[1]*i[1]+q[1]*q[1];
 			double frq=-f/p;
-			if (p<2e-3) frq=0;
+			if (p<2e-3) mute_time=t+0.05;
+			if (t<=mute_time) frq=-1;
 			printf("%lf %lf\n", t, frq/10);
 			i[2]=i[1]; i[1]=i[0];
 			q[2]=q[1]; q[1]=q[0];
