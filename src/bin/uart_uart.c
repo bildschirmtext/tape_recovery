@@ -2,8 +2,18 @@
 #include <stdint.h>
 
 
+int popcnt(uint8_t b)
+{
+	int cnt=0;
+	int n;
+	for (n=0; n<8; n++)
+		if ((b>>n)!=0) cnt=cnt+1;
+	return cnt;
+}
+
 int main(int argc, char *argv[])
 {
+	int bpos=0;
 	uint16_t byte=0;
 	int framepos=-1;
 	while (!feof(stdin)) {
@@ -27,7 +37,11 @@ int main(int argc, char *argv[])
 				if (c=='1') byte=byte | (1<<(bit-1));
 			} else { //Stop bit must be 1
 				if (c=='1') {
-					putc(byte, stdout);
+					if (popcnt(byte)%2==0) {
+						printf("%lf\t%d\n", bpos/19200.0, byte);
+					} else {
+						fprintf(stderr, "Parity Error 0x%02x\n", byte);
+					}
 				} else {
 					//If Stop bit is not 1, we have an error
 					fprintf(stderr, "Framing Error byte=0x%02x\n", byte);
@@ -36,6 +50,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		if (framepos>=0) framepos=framepos+1;
+		bpos=bpos+1;
 	}
 	return 0;
 }

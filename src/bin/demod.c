@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 			double f=i_*q[1]-q_*i[1];
 			double p=i[1]*i[1]+q[1]*q[1];
 			double frq=-f/p;
-			if (p<2e-3) mute_time=t+0.05;
+			if (p<5e-5) mute_time=t+0.005;
 			if (t<=mute_time) frq=-1;
 			printf("%lf %lf\n", t, frq/10);
 			i[2]=i[1]; i[1]=i[0];
